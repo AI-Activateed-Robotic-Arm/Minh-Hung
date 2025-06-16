@@ -1,8 +1,6 @@
 from ultralytics import YOLO
 import cv2
-# Load mô hình YOLOv8 pre-trained
 model = YOLO('yolov8n.pt')
-# Mở camera
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
     print("Không mở được camera!")
@@ -11,9 +9,7 @@ while True:
     ret, frame = cap.read()
     if not ret:
         break
-    # Dự đoán với YOLOv8
     results = model(frame)
-    # Xử lý các bounding box chỉ cho lớp "person"
     for result in results:
         boxes = result.boxes
         for box in boxes:
